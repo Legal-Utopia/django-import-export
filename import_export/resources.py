@@ -434,7 +434,11 @@ class Resource(metaclass=DeclarativeMetaclass):
         """
         self.before_save_instance(instance, using_transactions, dry_run)
         if self._meta.use_bulk:
-            if instance.pk:
+            creating = (
+                (hasattr(instance, "_state") and getattr(instance._state, "adding"))
+                or instance.pk is None
+            )
+            if not creating:
                 self.update_instances.append(instance)
             else:
                 self.create_instances.append(instance)
