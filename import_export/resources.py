@@ -16,7 +16,6 @@ from django.db.models.fields.related import ForeignObjectRel
 from django.db.models.query import QuerySet
 from django.db.transaction import (
     TransactionManagementError,
-    atomic,
     savepoint,
     savepoint_commit,
     savepoint_rollback,
