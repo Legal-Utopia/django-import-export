@@ -1049,7 +1049,7 @@ class ModelResourceTransactionTest(TransactionTestCase):
             def before_import(self, *args, **kwargs):
                 raise DatabaseError()
 
-            def save_instance(self):
+            def save_instance(self, *args, **kwargs):
                 raise DatabaseError()
 
         resource = CategoryResourceDbErrorsResource()
