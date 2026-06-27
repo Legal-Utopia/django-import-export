@@ -739,7 +739,7 @@ class Resource(metaclass=DeclarativeMetaclass):
         using_transactions = (use_transactions or dry_run) and supports_transactions
 
         if self._meta.batch_size is not None and (not isinstance(self._meta.batch_size, int) or self._meta.batch_size < 0):
-            raise ValueError("Batch size must be a positive integer")
+            raise ValueError("Batch size must be a non-negative integer")
 
         with atomic_if_using_transaction(using_transactions):
             return self.import_data_inner(dataset, dry_run, raise_errors, using_transactions, collect_failed_rows, **kwargs)
