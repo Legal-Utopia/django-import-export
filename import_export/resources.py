@@ -298,7 +298,7 @@ class Resource(metaclass=DeclarativeMetaclass):
         for field_name, f in self.fields.items():
             if f == field:
                 return field_name
-        raise AttributeError("Field %s does not exists in %s resource" % (
+        raise AttributeError("Field %s does not exist in %s resource" % (
             field, self.__class__))
 
     def init_instance(self, row=None):
