@@ -1068,12 +1068,12 @@ class ModelResource(Resource, metaclass=ModelDeclarativeMetaclass):
         return result
 
     @classmethod
-    def widget_kwargs_for_field(self, field_name):
+    def widget_kwargs_for_field(cls, field_name):
         """
         Returns widget kwargs for given field_name.
         """
-        if self._meta.widgets:
-            return self._meta.widgets.get(field_name, {})
+        if cls._meta.widgets:
+            return cls._meta.widgets.get(field_name, {})
         return {}
 
     @classmethod
