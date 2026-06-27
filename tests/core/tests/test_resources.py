@@ -62,8 +62,9 @@ class ResourceTestCase(TestCase):
 
         # check that resource instance fields attr isn't link to resource cls
         # fields
-        self.assertFalse(
-            MyResource.fields is self.my_resource.fields
+        self.assertIsNot(
+            MyResource.fields,
+            self.my_resource.fields
         )
 
         # dynamically add new resource field into resource instance
