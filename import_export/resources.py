@@ -30,10 +30,7 @@ from .instance_loaders import ModelInstanceLoader
 from .results import Error, Result, RowResult
 from .utils import atomic_if_using_transaction
 
-if django.VERSION[0] >= 3:
-    from django.core.exceptions import FieldDoesNotExist
-else:
-    from django.db.models.fields import FieldDoesNotExist
+from django.core.exceptions import FieldDoesNotExist
 
 
 logger = logging.getLogger(__name__)
