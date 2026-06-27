@@ -30,10 +30,7 @@ from .instance_loaders import ModelInstanceLoader
 from .results import Error, Result, RowResult
 from .utils import atomic_if_using_transaction
 
-if django.VERSION[0] >= 3:
-    from django.core.exceptions import FieldDoesNotExist
-else:
-    from django.db.models.fields import FieldDoesNotExist
+from django.core.exceptions import FieldDoesNotExist
 
 
 logger = logging.getLogger(__name__)
@@ -298,7 +295,7 @@ class Resource(metaclass=DeclarativeMetaclass):
         for field_name, f in self.fields.items():
             if f == field:
                 return field_name
-        raise AttributeError("Field %s does not exists in %s resource" % (
+        raise AttributeError("Field %s does not exist in %s resource" % (
             field, self.__class__))
 
     def init_instance(self, row=None):
@@ -739,7 +736,7 @@ class Resource(metaclass=DeclarativeMetaclass):
         using_transactions = (use_transactions or dry_run) and supports_transactions
 
         if self._meta.batch_size is not None and (not isinstance(self._meta.batch_size, int) or self._meta.batch_size < 0):
-            raise ValueError("Batch size must be a positive integer")
+            raise ValueError("Batch size must be a non-negative integer")
 
         with atomic_if_using_transaction(using_transactions):
             return self.import_data_inner(dataset, dry_run, raise_errors, using_transactions, collect_failed_rows, **kwargs)
@@ -1068,12 +1065,12 @@ class ModelResource(Resource, metaclass=ModelDeclarativeMetaclass):
         return result
 
     @classmethod
-    def widget_kwargs_for_field(self, field_name):
+    def widget_kwargs_for_field(cls, field_name):
         """
         Returns widget kwargs for given field_name.
         """
-        if self._meta.widgets:
-            return self._meta.widgets.get(field_name, {})
+        if cls._meta.widgets:
+            return cls._meta.widgets.get(field_name, {})
         return {}
 
     @classmethod
