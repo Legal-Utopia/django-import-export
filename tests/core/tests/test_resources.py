@@ -960,7 +960,8 @@ class ModelResourceTest(TestCase):
         self.assertNotEqual(objs[0].name, objs[1].name)
 
     def test_float_field(self):
-        #433
+        # Regression test for issue #433: importing None/empty values into a
+        # nullable float field should result in None (not conversion errors).
         class R(resources.ModelResource):
             class Meta:
                 model = WithFloatField
