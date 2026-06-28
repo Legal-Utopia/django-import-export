@@ -80,8 +80,8 @@ def do_update():
     Book.objects.bulk_create(books)
     assert NUM_ROWS == Book.objects.count()
 
-    # deletes - there must be existing rows in the DB...
-    # i.e. so they can be deleted
+    # updates - there must be existing rows in the DB...
+    # i.e. so they can be matched and updated
     all_books = Book.objects.all()
     rows = [(b.id, b.name, b.author_email, b.price) for b in all_books]
     # Build dataset from existing rows to run a bulk update import.
