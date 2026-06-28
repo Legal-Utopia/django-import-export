@@ -162,7 +162,7 @@ class BookResourceWithLineNumberLogger(BookResource):
         self.after_lines = []
         return super().__init__(*args, **kwargs)
 
-    def before_import_row(self,row, row_number=None, **kwargs):
+    def before_import_row(self, row, row_number=None, **kwargs):
         self.before_lines.append(row_number)
 
     def after_import_row(self, row, row_result, row_number=None, **kwargs):
@@ -652,7 +652,7 @@ class ModelResourceTest(TestCase):
         self.assertEqual(full_title, '%s by %s' % (self.book.name,
                                                    self.book.author.name))
 
-    def test_widget_fomat_in_fk_field(self):
+    def test_widget_format_in_fk_field(self):
         class B(resources.ModelResource):
 
             class Meta:
@@ -961,7 +961,8 @@ class ModelResourceTest(TestCase):
         self.assertNotEqual(objs[0].name, objs[1].name)
 
     def test_float_field(self):
-        #433
+        # Regression test for issue #433: importing None/empty values into a
+        # nullable float field should result in None (not conversion errors).
         class R(resources.ModelResource):
             class Meta:
                 model = WithFloatField
@@ -1457,7 +1458,7 @@ class BulkCreateTest(BulkTest):
 
     def test_no_changes_for_errors_if_use_transactions_enabled(self):
         with mock.patch('import_export.results.Result.has_errors') as mock_has_errors:
-            mock_has_errors.return_val = True
+            mock_has_errors.return_value = True
             self.resource.import_data(self.dataset)
         self.assertEqual(0, Book.objects.count())
 
