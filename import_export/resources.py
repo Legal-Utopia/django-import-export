@@ -42,6 +42,7 @@ def get_related_model(field):
     # Django 1.6, 1.7
     if field.rel:
         return field.rel.to
+    return None
 
 
 class ResourceOptions:
