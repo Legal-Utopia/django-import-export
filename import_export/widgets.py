@@ -181,7 +181,7 @@ class DateWidget(Widget):
             return ""
         try:
             return value.strftime(self.formats[0])
-        except:
+        except (AttributeError, TypeError, ValueError):
             return datetime_safe.new_date(value).strftime(self.formats[0])
 
 
