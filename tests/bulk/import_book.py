@@ -46,7 +46,7 @@ def profile(fn):
 
         # Measure time
         t = time.perf_counter()
-        retval = fn(*args, **kwargs)
+        fn(*args, **kwargs)
         elapsed = time.perf_counter() - t
         print(f'Time   {elapsed:0.4}')
 
