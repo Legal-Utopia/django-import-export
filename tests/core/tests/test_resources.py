@@ -161,7 +161,7 @@ class BookResourceWithLineNumberLogger(BookResource):
         self.after_lines = []
         return super().__init__(*args, **kwargs)
 
-    def before_import_row(self,row, row_number=None, **kwargs):
+    def before_import_row(self, row, row_number=None, **kwargs):
         self.before_lines.append(row_number)
 
     def after_import_row(self, row, row_result, row_number=None, **kwargs):
