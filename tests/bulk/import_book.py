@@ -84,7 +84,7 @@ def do_update():
     # i.e. so they can be deleted
     all_books = Book.objects.all()
     rows = [(b.id, b.name, b.author_email, b.price) for b in all_books]
-    # Add this line in order to perform bulk delete
+    # Build dataset from existing rows to run a bulk update import.
     dataset = tablib.Dataset(*rows, headers=['id', 'name', 'author_email', 'price'])
 
     book_resource = _BookResource()
