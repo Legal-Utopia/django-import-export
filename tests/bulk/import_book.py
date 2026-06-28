@@ -70,7 +70,7 @@ def do_create():
     book_resource = _BookResource()
     do_import(book_resource, dataset)
 
-    assert Book.objects.count() == NUM_ROWS * 2
+    assert Book.objects.count() == NUM_ROWS
     Book.objects.all().delete()
 
 
