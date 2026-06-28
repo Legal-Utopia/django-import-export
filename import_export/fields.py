@@ -66,9 +66,10 @@ class Field:
         value = self.widget.clean(value, row=data)
 
         if value in self.empty_values and self.default != NOT_PROVIDED:
-            if callable(self.default):
-                return self.default()
-            return self.default
+            default = self.default
+            if callable(default):
+                return default()
+            return default
 
         return value
 
