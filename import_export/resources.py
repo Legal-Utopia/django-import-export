@@ -4,7 +4,6 @@ import traceback
 from collections import OrderedDict
 from copy import deepcopy
 
-import django
 import tablib
 from diff_match_patch import diff_match_patch
 from django.conf import settings
