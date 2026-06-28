@@ -1456,7 +1456,7 @@ class BulkCreateTest(BulkTest):
 
     def test_no_changes_for_errors_if_use_transactions_enabled(self):
         with mock.patch('import_export.results.Result.has_errors') as mock_has_errors:
-            mock_has_errors.return_val = True
+            mock_has_errors.return_value = True
             self.resource.import_data(self.dataset)
         self.assertEqual(0, Book.objects.count())
 
