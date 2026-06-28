@@ -508,6 +508,20 @@ class ImportExportMixin(ImportMixin, ExportMixin):
     """
     Import and export mixin.
     """
+    def get_resource_kwargs(self, request, *args, **kwargs):
+        """
+        Resolve multiple-inheritance ambiguity by explicitly combining
+        resource kwargs from both import and export mixins.
+        """
+        import_kwargs = ImportMixin.get_resource_kwargs(self, request, *args, **kwargs)
+        export_kwargs = ExportMixin.get_resource_kwargs(self, request, *args, **kwargs)
+        combined_kwargs = {}
+        if import_kwargs:
+            combined_kwargs.update(import_kwargs)
+        if export_kwargs:
+            combined_kwargs.update(export_kwargs)
+        return combined_kwargs
+
     #: template for change_list view
     change_list_template = 'admin/import_export/change_list_import_export.html'
 
