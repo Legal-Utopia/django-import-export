@@ -241,28 +241,28 @@ class Resource(metaclass=DeclarativeMetaclass):
         self.delete_instances = list()
 
     @classmethod
-    def get_result_class(self):
+    def get_result_class(cls):
         """
         Returns the class used to store the result of an import.
         """
         return Result
 
     @classmethod
-    def get_row_result_class(self):
+    def get_row_result_class(cls):
         """
         Returns the class used to store the result of a row import.
         """
         return RowResult
 
     @classmethod
-    def get_error_result_class(self):
+    def get_error_result_class(cls):
         """
         Returns the class used to store an error resulting from an import.
         """
         return Error
 
     @classmethod
-    def get_diff_class(self):
+    def get_diff_class(cls):
         """
         Returns the class used to display the diff for an imported instance.
         """
